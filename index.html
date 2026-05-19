@@ -1,0 +1,168 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StoryBro - Mayfly Media Company</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="rail" aria-label="Primary">
+        <div class="brand">
+          <span class="brand-mark">SB</span>
+          <span>
+            <strong>StoryBro</strong>
+            <small>Mayfly Media Company</small>
+          </span>
+        </div>
+        <nav class="nav-list">
+          <button class="nav-item active" data-view="feed" title="For You"><span class="icon">#</span>For You</button>
+          <button class="nav-item" data-view="library" title="Library"><span class="icon">[]</span>Library</button>
+          <button class="nav-item" data-view="store" title="Store"><span class="icon">$</span>Store</button>
+          <button class="nav-item" data-view="reader" title="Reader"><span class="icon">&gt;</span>Reader</button>
+          <button class="nav-item" data-view="format" title="BookBite format"><span class="icon">{}</span>Format</button>
+        </nav>
+        <div class="rail-card">
+          <small>Tonight's streak</small>
+          <strong><span id="biteCount">0</span> BookBites</strong>
+          <span class="meter"><span id="streakMeter"></span></span>
+        </div>
+      </aside>
+
+      <main>
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">Original serialized fiction, tuned for binging</p>
+            <h1 id="viewTitle">For You</h1>
+          </div>
+          <div class="search-wrap">
+            <label class="sr-only" for="searchInput">Search StoryBro</label>
+            <input id="searchInput" type="search" placeholder="Search worlds, tropes, authors" />
+            <button id="clearSearch" class="icon-button" title="Clear search">x</button>
+          </div>
+        </header>
+
+        <section id="feedView" class="view active">
+          <div class="feature-panel">
+            <img src="assets/storybro-feature.png" alt="StoryBro digital reading artwork" />
+            <div class="feature-copy">
+              <p class="eyebrow">BookBite feed</p>
+              <h2>Short pieces from long worlds. Start anywhere, keep going.</h2>
+              <p>StoryBro floats complete scenes, boss-fight chapters, voice clips, and branching moments from undiscovered writers, then lets a reader continue the full work one bite at a time.</p>
+              <div class="segmented" role="group" aria-label="Feed mode">
+                <button class="segment active" data-feed="smart">Smart</button>
+                <button class="segment" data-feed="litrpg">LitRPG</button>
+                <button class="segment" data-feed="serious">Serious</button>
+                <button class="segment" data-feed="audio">Audio</button>
+              </div>
+            </div>
+          </div>
+          <div id="feedGrid" class="bite-grid"></div>
+        </section>
+
+        <section id="libraryView" class="view">
+          <div class="section-head">
+            <h2>Continue Reading</h2>
+            <span id="librarySummary"></span>
+          </div>
+          <div id="libraryGrid" class="shelf-grid"></div>
+        </section>
+
+        <section id="storeView" class="view">
+          <div class="store-layout">
+            <div>
+              <div class="section-head">
+                <h2>Original Store</h2>
+                <span>Mayfly-curated debuts and rising serials</span>
+              </div>
+              <div id="storeGrid" class="store-grid"></div>
+            </div>
+            <aside class="checkout-panel">
+              <h2>Membership</h2>
+              <p>Readers unlock daily BookBites, full-work passes, audio previews, and interactive branches. Writers keep ownership and get paid by finish rate, saves, and re-reads.</p>
+              <div class="price">$6.99 <small>/ month</small></div>
+              <button class="primary-action">Start free week</button>
+              <button class="secondary-action">Gift a serial pass</button>
+            </aside>
+          </div>
+        </section>
+
+        <section id="readerView" class="view">
+          <div class="reader-layout">
+            <article class="reader-card">
+              <div class="reader-meta">
+                <span id="readerSeries"></span>
+                <span id="readerProgress"></span>
+              </div>
+              <h2 id="readerTitle"></h2>
+              <p id="readerBody" class="reader-copy"></p>
+              <div id="choiceBox" class="choice-box"></div>
+              <div class="reader-actions">
+                <button id="prevBite" class="secondary-action">Previous</button>
+                <button id="nextBite" class="primary-action">Next BookBite</button>
+              </div>
+            </article>
+            <aside class="audio-panel">
+              <h2>Audio Clip</h2>
+              <p id="audioTitle"></p>
+              <div class="waveform" aria-hidden="true">
+                <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+              </div>
+              <button id="playAudio" class="primary-action">Play 43s sample</button>
+              <div class="mini-stat">
+                <span>Retention</span>
+                <strong id="retentionStat"></strong>
+              </div>
+              <div class="mini-stat">
+                <span>Branch depth</span>
+                <strong id="branchStat"></strong>
+              </div>
+            </aside>
+          </div>
+        </section>
+
+        <section id="formatView" class="view">
+          <div class="format-layout">
+            <div class="spec-card">
+              <p class="eyebrow">Recommended storage format</p>
+              <h2>BookBite Bundle: <code>.sbb</code></h2>
+              <p>A BookBite should be a portable ZIP package, similar in spirit to EPUB, but optimized for bite feeds, media clips, branching scenes, and ranking metadata. Store full works as a collection of bite packages plus a work manifest.</p>
+              <div class="format-points">
+                <span>Offline friendly</span>
+                <span>Creator portable</span>
+                <span>Branch aware</span>
+                <span>Audio ready</span>
+              </div>
+            </div>
+            <pre class="code-sample"><code>{
+  "format": "storybro.bookbite.v1",
+  "biteId": "forge-runner-01-003",
+  "workId": "forge-runner",
+  "sequence": 3,
+  "title": "The Shopkeeper's Raid",
+  "body": "bites/003.md",
+  "estimatedReadSeconds": 210,
+  "tags": ["litrpg", "crafting", "cozy-violence"],
+  "rankingSignals": {
+    "entryPoint": true,
+    "spoilage": "low",
+    "recommendedAfter": ["forge-runner-01-002"]
+  },
+  "media": [{ "type": "audio", "src": "media/003-clip.m4a" }],
+  "choices": "branches/003.json",
+  "rights": "rights.json"
+}</code></pre>
+          </div>
+          <div class="schema-strip">
+            <div><strong>manifest.json</strong><span>identity, order, tags, rights, ranking hints</span></div>
+            <div><strong>bites/*.md</strong><span>clean Markdown body with semantic scene breaks</span></div>
+            <div><strong>media/*</strong><span>short audio clips, cover art, captions</span></div>
+            <div><strong>branches/*.json</strong><span>choice nodes, state flags, unlock rules</span></div>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
